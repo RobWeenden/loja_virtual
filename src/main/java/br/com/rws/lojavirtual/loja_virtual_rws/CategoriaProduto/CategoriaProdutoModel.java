@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.MarcaProduto;
+package br.com.rws.lojavirtual.loja_virtual_rws.CategoriaProduto;
 
 import java.io.Serializable;
 
@@ -11,21 +11,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_marca_produto")
-@SequenceGenerator(name = "seq_tb_marca_produto", sequenceName = "seq_tb_marca_prod", allocationSize = 1, initialValue = 1)
-public class MarcaProdutoModel implements Serializable {
+@Table(name = "tb_categoria_produto")
+@SequenceGenerator(name = "seq_tb_categoria_produto", sequenceName = "seq_tb_categoria_produto", allocationSize = 1, initialValue = 1)
+public class CategoriaProdutoModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tb_marca_produto")
-    @Column(name = "mrp_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tb_categoria_produto")
+    @Column(name = "ctp_id")
     private Long id;
 
-    @Column(name = "mrp_desc")
+    @Column(name = "ctp_desc")
     private String descricao;
 
     public String getDescricao() {
         return descricao;
     }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -54,7 +55,7 @@ public class MarcaProdutoModel implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        MarcaProdutoModel other = (MarcaProdutoModel) obj;
+        CategoriaProdutoModel other = (CategoriaProdutoModel) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -62,4 +63,5 @@ public class MarcaProdutoModel implements Serializable {
             return false;
         return true;
     }
+
 }
