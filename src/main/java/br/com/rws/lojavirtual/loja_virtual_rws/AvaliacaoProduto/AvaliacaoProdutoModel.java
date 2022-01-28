@@ -30,6 +30,9 @@ public class AvaliacaoProdutoModel implements Serializable {
     @Column(name = "avp_nota")
     private Integer nota;
 
+    @Column(name = "avp_desc")
+    private String descricao;
+
     @ManyToOne(targetEntity = PessoaAbstract.class)
     @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private PessoaAbstract pessoa;
@@ -93,5 +96,13 @@ public class AvaliacaoProdutoModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
