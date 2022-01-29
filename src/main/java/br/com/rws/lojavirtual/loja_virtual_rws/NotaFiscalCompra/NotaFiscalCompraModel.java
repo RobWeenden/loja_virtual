@@ -31,25 +31,25 @@ public class NotaFiscalCompraModel implements Serializable {
     @Column(name = "nfc_id")
     private Long id;
 
-    @Column(name = "nfc_numero_nota")
+    @Column(name = "nfc_numero_nota", nullable = false)
     private String numeroNota;
 
-    @Column(name = "nfc_serie_nota")
+    @Column(name = "nfc_serie_nota", nullable = false)
     private String serieNota;
 
     @Column(name = "nfc_desc_observ")
     private String descObservacao;
 
-    @Column(name = "nfc_vlr_total")
+    @Column(name = "nfc_vlr_total", nullable = false)
     private BigDecimal vlrTotal;
 
     @Column(name = "nfc_vlr_desconto")
     private BigDecimal vlrDesconto;
 
-    @Column(name = "nfc_vlr_icms")
+    @Column(name = "nfc_vlr_icms", nullable = false)
     private BigDecimal vlrIcms;
 
-    @Column(name = "nfc_data_compra")
+    @Column(name = "nfc_data_compra", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataCompra;
 

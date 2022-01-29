@@ -20,7 +20,7 @@ public class CategoriaProdutoModel implements Serializable {
     @Column(name = "ctp_id")
     private Long id;
 
-    @Column(name = "ctp_desc")
+    @Column(name = "ctp_desc", nullable = false)
     private String descricao;
 
     public String getDescricao() {

@@ -26,19 +26,19 @@ public class NotaFiscalVendaModel implements Serializable {
     @Column(name = "nfv_id")
     private Long id;
 
-    @Column(name = "nfv_numero")
+    @Column(name = "nfv_numero", nullable = false)
     private String numero;
 
-    @Column(name = "nfv_serie")
+    @Column(name = "nfv_serie", nullable = false)
     private String serie;
 
-    @Column(name = "nfv_tipo")
+    @Column(name = "nfv_tipo", nullable = false)
     private String tipo;
 
-    @Column(name = "nfv_xml", columnDefinition = "text")
+    @Column(name = "nfv_xml", columnDefinition = "text", nullable = false)
     private String xml;
 
-    @Column(name = "nfv_pdf", columnDefinition = "text")
+    @Column(name = "nfv_pdf", columnDefinition = "text", nullable = false)
     private String pdf;
 
     @OneToOne

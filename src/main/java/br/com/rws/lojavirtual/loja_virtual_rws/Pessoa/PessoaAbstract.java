@@ -28,13 +28,13 @@ public abstract class PessoaAbstract implements Serializable {
     @Column(name = "psa_id")
     private Long id;
 
-    @Column(name = "psa_nome")
+    @Column(name = "psa_nome", nullable = false)
     private String nome;
 
-    @Column(name = "psa_email")
+    @Column(name = "psa_email", nullable = false)
     private String email;
 
-    @Column(name = "psa_telefone")
+    @Column(name = "psa_telefone", nullable = false)
     private String telefone;
 
     @OneToMany(mappedBy ="pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

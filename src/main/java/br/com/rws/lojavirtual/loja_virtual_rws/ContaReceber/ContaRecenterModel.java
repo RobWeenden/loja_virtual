@@ -32,22 +32,22 @@ public class ContaRecenterModel implements Serializable {
     @Column(name = "ctr_id")
     private Long id;
 
-    @Column(name = "ctr_desc")
+    @Column(name = "ctr_desc", nullable = false)
     private String descricao;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ctr_status")
-    private StatusContaReceber statusContaReceber;
+    @Column(name = "ctr_status", nullable = false)
+    private StatusContaReceberEnum statusContaReceber;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "ctr_data_vencimento")
+    @Column(name = "ctr_data_vencimento", nullable = false)
     private Date dtVencimento;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ctr_data_pagamento")
     private Date dtPagamento;
 
-    @Column(name = "ctr_vlr_total")
+    @Column(name = "ctr_vlr_total", nullable = false)
     private BigDecimal valorTotal;
 
     @Column(name = "ctr_vlr_desconto")
@@ -73,11 +73,11 @@ public class ContaRecenterModel implements Serializable {
         this.descricao = descricao;
     }
 
-    public StatusContaReceber getStatusContaReceber() {
+    public StatusContaReceberEnum getStatusContaReceber() {
         return statusContaReceber;
     }
 
-    public void setStatusContaReceber(StatusContaReceber statusContaReceber) {
+    public void setStatusContaReceber(StatusContaReceberEnum statusContaReceber) {
         this.statusContaReceber = statusContaReceber;
     }
 

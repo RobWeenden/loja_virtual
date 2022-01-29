@@ -35,28 +35,28 @@ public class VendaCompraLojaModel implements Serializable{
     @Column(name = "vcl_id")
     private Long id;
 
-    @Column(name = "vcl_vlr_total")
+    @Column(name = "vcl_vlr_total", nullable = false)
     private BigDecimal valorTotal;
     
     @Column(name = "vcl_vlr_desc")
     private BigDecimal valorDesconto;
 
-    @Column(name = "vcl_vlr_frete")
+    @Column(name = "vcl_vlr_frete", nullable = false)
     private BigDecimal valorFrete;
 
-    @Column(name = "vcl_dia_entrega")
+    @Column(name = "vcl_dia_entrega", nullable = false)
     private Integer diaEntrega;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "vcl_data_venda")
+    @Column(name = "vcl_data_venda", nullable = false)
     private Date dataVenda;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "vcl_data_entrega")
+    @Column(name = "vcl_data_entrega", nullable = false)
     private Date dataEntrega;
 
     @ManyToOne
-    @JoinColumn(name = "cupom_desconto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "cupom_desconto_fk"))
+    @JoinColumn(name = "cupom_desconto_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "cupom_desconto_fk"))
     private CupomDescontoModel cupomDesconto;
 
     @OneToOne

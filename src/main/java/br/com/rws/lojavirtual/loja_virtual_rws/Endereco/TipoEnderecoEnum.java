@@ -1,12 +1,12 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.Endereco;
 
-public enum TipoEndereco {
+public enum TipoEnderecoEnum {
 
     COBRANCA("Cobrança"), ENTREGA("Entrega");
 
     private String descricao;
 
-    private TipoEndereco(String descricao) {
+    private TipoEnderecoEnum(String descricao) {
         this.descricao = descricao;
     }
 

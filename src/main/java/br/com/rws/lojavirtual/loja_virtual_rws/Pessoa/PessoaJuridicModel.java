@@ -10,19 +10,19 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "psa_id")
 public class PessoaJuridicModel extends PessoaAbstract {
 
-    @Column(name = "psj_cnpj")
+    @Column(name = "psj_cnpj", nullable = false)
     private String cnpj;
 
-    @Column(name = "psj_insc_estadual")
+    @Column(name = "psj_insc_estadual", nullable = false)
     private String inscEstadual;
 
     @Column(name = "psj_insc_municipal")
     private String inscMunicipal;
 
-    @Column(name = "psj_nome_fantasia")
+    @Column(name = "psj_nome_fantasia", nullable = false)
     private String nomeFantasia;
 
-    @Column(name = "psj_razao_social")
+    @Column(name = "psj_razao_social", nullable = false)
     private String razaoSocial;
 
     @Column(name = "psj_categoria")

@@ -21,33 +21,33 @@ public class ProdutoModel implements Serializable {
     @Column(name = "prod_id")
     private Long id;
 
-    @Column(name = "prod_tipo_unidade")
+    @Column(name = "prod_tipo_unidade", nullable = false)
     private String tipoUnidade;
 
-    @Column(name = "prod_nome")
+    @Column(name = "prod_nome", nullable = false)
     private String nome;
 
-    @Column(name = "prod_desc", columnDefinition = "text", length = 2000)
+    @Column(name = "prod_desc", columnDefinition = "text", length = 2000, nullable = false)
     private String descricao;
 
     // Nota Item Produto
 
-    @Column(name = "prod_peso")
+    @Column(name = "prod_peso", nullable = false)
     private Double peso;
 
-    @Column(name = "prod_largura")
+    @Column(name = "prod_largura", nullable = false)
     private Double largura;
 
-    @Column(name = "prod_altura")
+    @Column(name = "prod_altura", nullable = false)
     private Double altura;
 
-    @Column(name = "prod_profundidad")
+    @Column(name = "prod_profundidad", nullable = false)
     private Double profundidade;
 
-    @Column(name = "prod_vlr_venda")
+    @Column(name = "prod_vlr_venda", nullable = false)
     private BigDecimal vlrVenda = BigDecimal.ZERO;
 
-    @Column(name = "prod_qtd_estoque")
+    @Column(name = "prod_qtd_estoque", nullable = false)
     private Integer qtdEstoque = 0;
 
     @Column(name = "prod_qtd_alert_estoque")
@@ -62,7 +62,7 @@ public class ProdutoModel implements Serializable {
     @Column(name = "prod_qtd_clique")
     private Integer qtdClique = 0;
 
-    @Column(name = "prod_ativo")
+    @Column(name = "prod_ativo", nullable = false)
     private Boolean ativo = Boolean.TRUE;
 
     public Long getId() {

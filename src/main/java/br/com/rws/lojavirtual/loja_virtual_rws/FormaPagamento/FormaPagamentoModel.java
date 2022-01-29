@@ -20,7 +20,7 @@ public class FormaPagamentoModel implements Serializable {
     @Column(name = "fpg_id")
     private Long id;
 
-    @Column(name = "fpg_desc")
+    @Column(name = "fpg_desc", nullable = false)
     private String descricao;
 
     public Long getId() {

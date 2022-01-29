@@ -26,10 +26,10 @@ public class ImagemProdutoModel implements Serializable {
     @Column(name = "imp_id")
     private Long id;
 
-    @Column(name = "imp_img_original", columnDefinition = "text")
+    @Column(name = "imp_img_original", columnDefinition = "text", nullable = false)
     private String imgOriginal;
 
-    @Column(name = "imp_img_miniatura", columnDefinition = "text")
+    @Column(name = "imp_img_miniatura", columnDefinition = "text", nullable = false)
     private String imgMiniatura;
 
     @ManyToOne

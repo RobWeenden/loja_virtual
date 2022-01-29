@@ -20,7 +20,7 @@ public class MarcaProdutoModel implements Serializable {
     @Column(name = "mrp_id")
     private Long id;
 
-    @Column(name = "mrp_desc")
+    @Column(name = "mrp_desc", nullable = false)
     private String descricao;
 
     public String getDescricao() {

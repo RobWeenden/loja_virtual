@@ -27,10 +27,10 @@ public class AvaliacaoProdutoModel implements Serializable {
     @Column(name = "avp_id")
     private Long id;
 
-    @Column(name = "avp_nota")
+    @Column(name = "avp_nota", nullable = false)
     private Integer nota;
 
-    @Column(name = "avp_desc")
+    @Column(name = "avp_desc", nullable = false)
     private String descricao;
 
     @ManyToOne(targetEntity = PessoaAbstract.class)

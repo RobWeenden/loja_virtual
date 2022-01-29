@@ -1,12 +1,12 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.ContaReceber;
 
-public enum StatusContaReceber {
+public enum StatusContaReceberEnum {
 
     COBRANCA("Pagar"), VENCIDA("Vencida"), ABERTA("Aberta"), QUITADA("Quitada");
 
     private String descricao;
 
-    private StatusContaReceber(String descricao) {
+    private StatusContaReceberEnum(String descricao) {
         this.descricao = descricao;
     }
 

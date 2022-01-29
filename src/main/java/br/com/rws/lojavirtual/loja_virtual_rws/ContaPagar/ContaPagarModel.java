@@ -32,10 +32,10 @@ public class ContaPagarModel implements Serializable {
     @Column(name = "ctp_id")
     private Long id;
 
-    @Column(name = "ctp_desc")
+    @Column(name = "ctp_desc", nullable = false)
     private String descricao;
 
-    @Column(name = "ctp_vlr_total")
+    @Column(name = "ctp_vlr_total", nullable = false)
     private BigDecimal valorTotal;
 
     @Column(name = "ctp_vlr_desconto")
@@ -43,10 +43,10 @@ public class ContaPagarModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "ctr_status")
-    private StatusContaPagar statusContaPagar;
+    private StatusContaPagarEnum statusContaPagar;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "ctp_data_vencimento")
+    @Column(name = "ctp_data_vencimento", nullable = false)
     private Date dtVencimento;
 
     @Temporal(TemporalType.DATE)
@@ -93,11 +93,11 @@ public class ContaPagarModel implements Serializable {
         this.valorDesconto = valorDesconto;
     }
 
-    public StatusContaPagar getStatusContaPagar() {
+    public StatusContaPagarEnum getStatusContaPagar() {
         return statusContaPagar;
     }
 
-    public void setStatusContaPagar(StatusContaPagar statusContaPagar) {
+    public void setStatusContaPagar(StatusContaPagarEnum statusContaPagar) {
         this.statusContaPagar = statusContaPagar;
     }
 

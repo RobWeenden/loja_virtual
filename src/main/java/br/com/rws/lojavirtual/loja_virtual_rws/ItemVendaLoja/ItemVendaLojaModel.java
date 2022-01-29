@@ -27,7 +27,7 @@ public class ItemVendaLojaModel implements Serializable {
     @Column(name = "ivl_id")
     private Long id;
 
-    @Column(name = "ivl_quantidade")
+    @Column(name = "ivl_quantidade", nullable = false)
     private Double quantidade;
 
     @ManyToOne

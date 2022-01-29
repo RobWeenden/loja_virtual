@@ -24,7 +24,7 @@ public class CupomDescontoModel implements Serializable {
     @Column(name = "cpd_id")
     private Long id;
 
-    @Column(name = "cpd_codigo_desc")
+    @Column(name = "cpd_codigo_desc", nullable = false)
     private String codigoDescricao;
 
     @Column(name = "cpd_vlr_real_desconto")
@@ -34,7 +34,7 @@ public class CupomDescontoModel implements Serializable {
     private BigDecimal vlrPorcentDesconto;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "cpd_data_valid_cupom")
+    @Column(name = "cpd_data_valid_cupom", nullable = false)
     private Date dataValidCupom;
 
     @Override

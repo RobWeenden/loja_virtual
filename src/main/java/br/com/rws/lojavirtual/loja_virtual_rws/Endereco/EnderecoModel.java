@@ -28,28 +28,28 @@ public class EnderecoModel implements Serializable {
     @Column(name = "end_id")
     private Long id;
 
-    @Column(name = "end_rua")
+    @Column(name = "end_rua", nullable = false)
     private String rua;
 
     @Column(name = "end_logradouro")
     private String logadouro;
 
-    @Column(name = "end_bairro")
+    @Column(name = "end_bairro", nullable = false)
     private String bairro;
 
-    @Column(name = "end_cidade")
+    @Column(name = "end_cidade", nullable = false)
     private String cidade;
 
     @Column(name = "end_complemento")
     private String complemento;
 
-    @Column(name = "end_cep")
+    @Column(name = "end_cep", nullable = false)
     private String cep;
 
-    @Column(name = "end_numero")
+    @Column(name = "end_numero", nullable = false)
     private String numero;
 
-    @Column(name = "end_uf")
+    @Column(name = "end_uf", nullable = false)
     private String uf;
 
     @ManyToOne(targetEntity = PessoaAbstract.class)
@@ -57,13 +57,14 @@ public class EnderecoModel implements Serializable {
     private PessoaAbstract pessoa;
 
     @Enumerated(EnumType.STRING)
-    private TipoEndereco tipoEndereco;
+    @Column(name = "end_tipo_enderco", nullable = false)
+    private TipoEnderecoEnum tipoEndereco;
 
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+    public void setTipoEndereco(TipoEnderecoEnum tipoEndereco) {
         this.tipoEndereco = tipoEndereco;
     }
 
-    public TipoEndereco getTipoEndereco() {
+    public TipoEnderecoEnum getTipoEndereco() {
         return tipoEndereco;
     }
 
