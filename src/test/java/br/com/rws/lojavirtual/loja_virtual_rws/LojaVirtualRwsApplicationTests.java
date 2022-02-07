@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -23,6 +24,7 @@ import br.com.rws.lojavirtual.loja_virtual_rws.RoleAcesso.RoleAcessoRepository;
 import br.com.rws.lojavirtual.loja_virtual_rws.RoleAcesso.RoleAcessoService;
 import junit.framework.TestCase;
 
+@Profile("test")
 @SpringBootTest(classes = LojaVirtualRwsApplication.class)
 class LojaVirtualRwsApplicationTests extends TestCase {
 
@@ -137,7 +139,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 
 	}
 
-	@Test
+	//@Test
 	public void testRestApiSearchDescriptionRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
@@ -163,7 +165,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	void testCadastraAcesso() {
 		RoleAcessoModel role = new RoleAcessoModel();
 
@@ -171,7 +173,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 		assertEquals(true, role.getId() == null);
 		role = roleController.salvarRole(role).getBody();
 		assertEquals(true, role.getId() > 0);
-		assertEquals("ROLE_TECNICO", role.getDescricao());
+		assertEquals("ROLE_FUNCIONARIO", role.getDescricao());
 
 		RoleAcessoModel role2 = new RoleAcessoModel();
 
@@ -188,10 +190,10 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 		assertEquals(true, role3 == null);
 
 		role = new RoleAcessoModel();
-		role.setDescricao("ROLE_ALUNO");
+		role.setDescricao("ROLE_FUNCIONARIO");
 		role = roleController.salvarRole(role).getBody();
 
-		List<RoleAcessoModel> listRole = roleRepository.buscarRoleDescricao("ALUNO".trim().toUpperCase());
+		List<RoleAcessoModel> listRole = roleRepository.buscarRoleDescricao("FUNCIONARIO".trim().toUpperCase());
 		assertEquals(1, listRole.size());
 		roleRepository.deleteById(role.getId());
 	}
