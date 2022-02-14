@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "config_api.expirationTime",
+    "type": "java.lang.String",
+    "description": "A description for 'config_api.expirationTime'"
+  },
+  {
+    "name": "config_api.expiration-time",
+    "type": "java.lang.String",
+    "description": "A description for 'config_api.expiration-time'"
+  },
+  {
+    "name": "config_api.expiration-time",
+    "type": "java.lang.String",
+    "description": "A description for 'config_api.expiration-time'"
+  },
+  {
+    "name": "config_api.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'config_api.secret-key'"
+  }
+]}
