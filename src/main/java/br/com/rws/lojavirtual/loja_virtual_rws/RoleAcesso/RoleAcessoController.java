@@ -25,7 +25,7 @@ public class RoleAcessoController {
     private RoleAcessoRepository roleRepository;
 
     @ResponseBody
-    @PostMapping(value = "**/save")
+    @PostMapping(value = "**/acesso-save")
     public ResponseEntity<RoleAcessoModel> salvarRole(@RequestBody RoleAcessoModel roleModel) {
         RoleAcessoModel role = roleService.save(roleModel);
 
