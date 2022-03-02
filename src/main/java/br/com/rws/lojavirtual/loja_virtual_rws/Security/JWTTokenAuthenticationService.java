@@ -1,31 +1,29 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.Security;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Config.ApiConfig;
 import br.com.rws.lojavirtual.loja_virtual_rws.Context.ApplicationContextLoad;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 
 //Metodo para gerar o Token de autenticação gerar ele e recuperar
 
 @Service
 @Component
 public class JWTTokenAuthenticationService {
-
-    @Autowired
-    private static ApiConfig configApi;
 
     private static final long EXPIRATION_TIME = 1728000000;
     private static final String SECRET = "!Uwur4[OzqeXmBThewn*%kI-]@#EGrU($(dWmUkD#&aP(uxNIC";
@@ -46,8 +44,11 @@ public class JWTTokenAuthenticationService {
 
     }
 
-    public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response) {
-            String token = request.getHeader(HEADER_STRING);
+    public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        String token = request.getHeader(HEADER_STRING);
+        try {
+
             if (token != null) {
                 String tokenClean = token.replace(TOKEN_PREFIX, "").trim();
                 String tokenUser = Jwts.parser()
@@ -64,8 +65,16 @@ public class JWTTokenAuthenticationService {
                     }
                 }
             }
+        } catch (SignatureException signatureExcp) {
+            response.getWriter().write("Token está invalido!!");
+        } catch (ExpiredJwtException expiredJwt) {
+            response.getWriter().write("Token está expirado, efetue o login novamente.");
 
-        liberacaoCors(response);
+        } finally {
+
+            liberacaoCors(response);
+        }
+
         return null;
     }
 
