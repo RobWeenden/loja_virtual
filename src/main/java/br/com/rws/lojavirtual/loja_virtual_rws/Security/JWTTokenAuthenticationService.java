@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
 import br.com.rws.lojavirtual.loja_virtual_rws.Context.ApplicationContextLoad;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioRepository;
@@ -24,21 +25,16 @@ import io.jsonwebtoken.SignatureException;
 @Service
 @Component
 public class JWTTokenAuthenticationService {
-
-    private static final long EXPIRATION_TIME = 1728000000;
-    private static final String SECRET = "!Uwur4[OzqeXmBThewn*%kI-]@#EGrU($(dWmUkD#&aP(uxNIC";
-    private static final String TOKEN_PREFIX = "Bearer";
-    private static final String HEADER_STRING = "Authorization";
-
+        
     public void addAuthentication(HttpServletResponse response, String username) throws Exception {
 
         String JWT = Jwts.builder().setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + Constantes.EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, Constantes.SECRET).compact();
 
-        String token = TOKEN_PREFIX + " " + JWT;
+        String token = Constantes.TOKEN_PREFIX + " " + JWT;
 
-        response.addHeader(HEADER_STRING, token);
+        response.addHeader(Constantes.HEADER_STRING, token);
         liberacaoCors(response);
         response.getWriter().write("{\"Authorization\": \"" + token + "\"}");//USANDO PARA O POSTMAN - TESTE
 
@@ -46,13 +42,13 @@ public class JWTTokenAuthenticationService {
 
     public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        String token = request.getHeader(HEADER_STRING);
+        String token = request.getHeader(Constantes.HEADER_STRING);
         try {
 
             if (token != null) {
-                String tokenClean = token.replace(TOKEN_PREFIX, "").trim();
+                String tokenClean = token.replace(Constantes.TOKEN_PREFIX, "").trim();
                 String tokenUser = Jwts.parser()
-                        .setSigningKey(SECRET)
+                        .setSigningKey(Constantes.SECRET)
                         .parseClaimsJws(tokenClean)
                         .getBody().getSubject();
                 if (tokenUser != null) {
