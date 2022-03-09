@@ -65,4 +65,13 @@ public class ExceptionsController extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+
+    @ExceptionHandler(CustomExceptions.class)
+    public ResponseEntity<Object> handleExceptionCustom(CustomExceptions customExpr){
+        ObjectErrorDTO errorDTO = new ObjectErrorDTO();
+        errorDTO.setError(customExpr.getMessage());
+        errorDTO.setCodeError(HttpStatus.OK.toString());
+
+        return new ResponseEntity<Object>(errorDTO, HttpStatus.OK);
+    }
 }

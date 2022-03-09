@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
+
 @Controller
 @RestController
 public class RoleAcessoController {
@@ -26,7 +28,16 @@ public class RoleAcessoController {
 
     @ResponseBody
     @PostMapping(value = "**/acesso-save")
-    public ResponseEntity<RoleAcessoModel> salvarRole(@RequestBody RoleAcessoModel roleModel) {
+    public ResponseEntity<RoleAcessoModel> salvarRole(@RequestBody RoleAcessoModel roleModel) throws CustomExceptions {
+
+        if (roleModel.getId() == null) {
+            List<RoleAcessoModel> roleSearch = roleRepository
+                    .buscarRoleDescricao(roleModel.getDescricao().toUpperCase());
+            if (!roleSearch.isEmpty()) {
+                throw new CustomExceptions("Já existe Acesso com a descrição: " + roleModel.getDescricao());
+            }
+        }
+
         RoleAcessoModel role = roleService.save(roleModel);
 
         return new ResponseEntity<>(role, HttpStatus.OK);
@@ -50,8 +61,12 @@ public class RoleAcessoController {
 
     @ResponseBody
     @GetMapping(value = "**/searchRole/{id}")
-    public ResponseEntity<RoleAcessoModel> searchRole(@PathVariable("id") Long id) {
-        RoleAcessoModel role = roleRepository.findById(id).get();
+    public ResponseEntity<RoleAcessoModel> searchRole(@PathVariable("id") Long id) throws CustomExceptions {
+        RoleAcessoModel role = roleRepository.findById(id).orElse(null);
+
+        if (role == null) {
+            throw new CustomExceptions("Não foi encontrado Acesso com código: " + id);
+        }
 
         return new ResponseEntity<RoleAcessoModel>(role, HttpStatus.OK);
     }
@@ -59,7 +74,7 @@ public class RoleAcessoController {
     @ResponseBody
     @GetMapping(value = "**/searchDescriptionRole/{desc}")
     public ResponseEntity<List<RoleAcessoModel>> searchDescriptionRole(@PathVariable("desc") String desc) {
-        List<RoleAcessoModel> role = roleRepository.buscarRoleDescricao(desc);
+        List<RoleAcessoModel> role = roleRepository.buscarRoleDescricao(desc.toUpperCase());
 
         return new ResponseEntity<List<RoleAcessoModel>>(role, HttpStatus.OK);
     }
