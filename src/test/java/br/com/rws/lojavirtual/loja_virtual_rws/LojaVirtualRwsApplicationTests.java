@@ -1,5 +1,6 @@
 package br.com.rws.lojavirtual.loja_virtual_rws;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.RoleAcesso.RoleAcessoController;
 import br.com.rws.lojavirtual.loja_virtual_rws.RoleAcesso.RoleAcessoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.RoleAcesso.RoleAcessoRepository;
@@ -29,9 +31,6 @@ import junit.framework.TestCase;
 class LojaVirtualRwsApplicationTests extends TestCase {
 
 	@Autowired
-	private RoleAcessoService roleService;
-
-	@Autowired
 	private RoleAcessoRepository roleRepository;
 
 	@Autowired
@@ -40,17 +39,17 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 	@Autowired
 	private WebApplicationContext wac;
 
-	//@Test
+	@Test
 	public void testRestApiCadastroRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
-
+		String descricao = "ROLE_COMPRADOR"+Calendar.getInstance().getTimeInMillis();
 		RoleAcessoModel role = new RoleAcessoModel();
-		role.setDescricao("ROLE_COMPRADOR");
+		role.setDescricao(descricao);
 
 		ObjectMapper obM = new ObjectMapper();
 
-		ResultActions retornoApi = mockMvc.perform(MockMvcRequestBuilders.post("/save")
+		ResultActions retornoApi = mockMvc.perform(MockMvcRequestBuilders.post("/acesso-save")
 									.content(obM.writeValueAsString(role))
 									.accept(MediaType.APPLICATION_JSON)
 									.contentType(MediaType.APPLICATION_JSON));
@@ -59,15 +58,15 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 		//CONVERT RETURN API TO OBJECT ACCESS
 		RoleAcessoModel objetoRetorno = obM.readValue(retornoApi.andReturn().getResponse().getContentAsString(), RoleAcessoModel.class);
 
-		assertEquals(role.getDescricao(), objetoRetorno.getDescricao());
+		assertEquals(role.getDescricao(),objetoRetorno.getDescricao());
 
 	}
 
-	//@Test
+	@Test
 	public void testRestApiDeleteRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
-
+		
 		RoleAcessoModel role = new RoleAcessoModel();
 		role.setDescricao("ROLE_TESTE_DELETE");
 		role =roleRepository.save(role);
@@ -88,7 +87,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	public void testRestApiDeleteByIdRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
@@ -113,7 +112,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	public void testRestApiSearchRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
@@ -139,7 +138,7 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	public void testRestApiSearchDescriptionRoleAcesso() throws JsonProcessingException, Exception{
 		DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
 		MockMvc mockMvc = builder.build();
@@ -166,14 +165,18 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 	}
 
 	@Test
-	void testCadastraAcesso() {
+	void testCadastraAcesso() throws CustomExceptions {
+
+		String descricao1 = "ROLE_FUNCIONARIO"+Calendar.getInstance().getTimeInMillis();
+
+
 		RoleAcessoModel role = new RoleAcessoModel();
 
-		role.setDescricao("ROLE_FUNCIONARIO");
+		role.setDescricao(descricao1);
 		assertEquals(true, role.getId() == null);
 		role = roleController.salvarRole(role).getBody();
 		assertEquals(true, role.getId() > 0);
-		assertEquals("ROLE_FUNCIONARIO", role.getDescricao());
+		assertEquals(descricao1, role.getDescricao());
 
 		RoleAcessoModel role2 = new RoleAcessoModel();
 
@@ -190,10 +193,10 @@ class LojaVirtualRwsApplicationTests extends TestCase {
 		assertEquals(true, role3 == null);
 
 		role = new RoleAcessoModel();
-		role.setDescricao("ROLE_FUNCIONARIO");
+		role.setDescricao(descricao1);
 		role = roleController.salvarRole(role).getBody();
 
-		List<RoleAcessoModel> listRole = roleRepository.buscarRoleDescricao("FUNCIONARIO".trim().toUpperCase());
+		List<RoleAcessoModel> listRole = roleRepository.buscarRoleDescricao(descricao1.trim().toUpperCase());
 		assertEquals(1, listRole.size());
 		roleRepository.deleteById(role.getId());
 	}
