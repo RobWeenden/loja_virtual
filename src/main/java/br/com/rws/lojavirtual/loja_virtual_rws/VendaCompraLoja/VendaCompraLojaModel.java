@@ -79,6 +79,10 @@ public class VendaCompraLojaModel implements Serializable{
     @JoinColumn(name = "endereco_cobranca_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "endereco_cobranca_fk"))
     private EnderecoModel enderecoCobranca;
 
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -206,6 +210,14 @@ public class VendaCompraLojaModel implements Serializable{
 
     public void setEnderecoCobranca(EnderecoModel enderecoCobranca) {
         this.enderecoCobranca = enderecoCobranca;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
     
 }

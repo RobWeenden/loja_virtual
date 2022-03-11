@@ -6,13 +6,17 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -42,6 +46,10 @@ public abstract class PessoaAbstract implements Serializable {
 
     @Column(name = "psa_tipo_pessoa")
     private String tipoPessoa;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = true, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
@@ -117,6 +125,22 @@ public abstract class PessoaAbstract implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public List<EnderecoModel> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<EnderecoModel> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 
 }

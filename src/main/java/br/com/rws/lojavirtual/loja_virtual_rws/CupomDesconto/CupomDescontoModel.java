@@ -5,14 +5,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaAbstract;
 
 @Entity
 @Table(name = "tb_cupom_desconto")
@@ -36,6 +42,10 @@ public class CupomDescontoModel implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "cpd_data_valid_cupom", nullable = false)
     private Date dataValidCupom;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     @Override
     public int hashCode() {
@@ -100,5 +110,13 @@ public class CupomDescontoModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 }

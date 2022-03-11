@@ -57,6 +57,10 @@ public class ContaRecenterModel implements Serializable {
     @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private PessoaAbstract pessoa;
 
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
+
     public Long getId() {
         return id;
     }
@@ -144,6 +148,14 @@ public class ContaRecenterModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 
 }

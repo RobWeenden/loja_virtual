@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaAbstract;
 import br.com.rws.lojavirtual.loja_virtual_rws.Produto.ProdutoModel;
 
 @Entity
@@ -35,6 +36,10 @@ public class ImagemProdutoModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
     private ProdutoModel produto;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     public Long getId() {
         return id;
@@ -91,5 +96,13 @@ public class ImagemProdutoModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 }

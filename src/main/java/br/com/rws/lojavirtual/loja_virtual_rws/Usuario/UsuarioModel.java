@@ -38,7 +38,7 @@ public class UsuarioModel implements UserDetails {
     @Column(name = "usu_id")
     private Long id;
 
-    @Column(name = "usu_login", nullable = false)
+    @Column(name = "usu_login", nullable = false, unique=true)
     private String login;
 
     @Column(name = "usu_password", nullable = false)
@@ -52,6 +52,10 @@ public class UsuarioModel implements UserDetails {
     @ManyToOne(targetEntity = PessoaAbstract.class)
     @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private PessoaAbstract pessoa;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_usuario_role_acesso", uniqueConstraints = @UniqueConstraint(columnNames = { "usuario_id",
@@ -162,6 +166,14 @@ public class UsuarioModel implements UserDetails {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 
 }

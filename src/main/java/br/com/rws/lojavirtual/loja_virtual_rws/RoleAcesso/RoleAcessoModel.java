@@ -71,5 +71,4 @@ public class RoleAcessoModel implements GrantedAuthority {
             return false;
         return true;
     }
-
 }

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaAbstract;
 import br.com.rws.lojavirtual.loja_virtual_rws.VendaCompraLoja.VendaCompraLojaModel;
 
 @Entity
@@ -41,6 +42,10 @@ public class StatusRastreioModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "venda_compra_loja_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "venda_compra_loja_fk"))
     private VendaCompraLojaModel vendaCompraLoja;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     public Long getId() {
         return id;
@@ -113,6 +118,14 @@ public class StatusRastreioModel implements Serializable {
 
     public void setVendaCompraLoja(VendaCompraLojaModel vendaCompraLoja) {
         this.vendaCompraLoja = vendaCompraLoja;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 
 }

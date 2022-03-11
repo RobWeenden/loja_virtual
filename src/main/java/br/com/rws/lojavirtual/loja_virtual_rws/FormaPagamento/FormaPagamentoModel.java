@@ -3,12 +3,18 @@ package br.com.rws.lojavirtual.loja_virtual_rws.FormaPagamento;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaAbstract;
 
 @Entity
 @Table(name = "tb_forma_pagamento")
@@ -22,6 +28,10 @@ public class FormaPagamentoModel implements Serializable {
 
     @Column(name = "fpg_desc", nullable = false)
     private String descricao;
+
+    @ManyToOne(targetEntity = PessoaAbstract.class)
+    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+    private PessoaAbstract empresa;
 
     public Long getId() {
         return id;
@@ -62,6 +72,14 @@ public class FormaPagamentoModel implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public PessoaAbstract getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(PessoaAbstract empresa) {
+        this.empresa = empresa;
     }
 
 }
