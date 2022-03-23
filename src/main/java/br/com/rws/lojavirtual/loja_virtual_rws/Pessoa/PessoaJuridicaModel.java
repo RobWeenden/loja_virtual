@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_pessoa_juridica")
 @PrimaryKeyJoinColumn(name = "psa_id")
-public class PessoaJuridicModel extends PessoaAbstract {
+public class PessoaJuridicaModel extends PessoaAbstract {
 
     @Column(name = "psj_cnpj", nullable = false)
     private String cnpj;
