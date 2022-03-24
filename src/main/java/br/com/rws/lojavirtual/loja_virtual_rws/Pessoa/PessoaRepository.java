@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PessoaRepository extends CrudRepository<PessoaJuridicaModel, Long>{
     
-    @Query(value = "SELECT pj FROM PessoaJuridicModel pj WHERE pj.psj_cnpj = ?1")
+    @Query(value = "SELECT pj FROM PessoaJuridicaModel pj WHERE pj.cnpj = ?1")
     public PessoaJuridicaModel existeCnpjCadastrado(String cnpj);
 }

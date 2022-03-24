@@ -17,7 +17,7 @@ public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
-
+    
     @PostMapping(value = "**/save/pessoa-juridica")
     public ResponseEntity<PessoaJuridicaModel> savePessoaJuridica(@RequestBody PessoaJuridicaModel pessoaJuridica)
             throws CustomExceptions {
