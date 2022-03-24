@@ -34,14 +34,7 @@ public class TesteUsuario extends TestCase {
         pessoaJuridica.setRazaoSocial("_razao_social_"+gerarCaracterAleatorio());
 
         pessoaController.savePessoaJuridica(pessoaJuridica);
-        // PessoaFisicaModel pessoaFisica = new PessoaFisicaModel();
-        // pessoaFisica.setCpf("123158558");
-        // pessoaFisica.setNome("_nome_asdkfjkeadsfjjk");
-        // pessoaFisica.setEmail("nome@teste.com");
-        // pessoaFisica.setTelefone("8585548555");
-
-        // pessoaFisica.setEmpresa(pessoaFisica);
-
+        //CONTINUE 
     }
 
     @Test
