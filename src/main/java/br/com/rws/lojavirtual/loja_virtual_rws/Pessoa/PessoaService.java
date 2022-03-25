@@ -22,6 +22,12 @@ public class PessoaService {
     private JdbcTemplate jdbc;
 
     public PessoaJuridicaModel savePessoaJuridica(PessoaJuridicaModel pessoaJuridica) {
+
+        for (int i = 0; i < pessoaJuridica.getEnderecos().size(); i++) {
+            pessoaJuridica.getEnderecos().get(i).setPessoa(pessoaJuridica);
+            pessoaJuridica.getEnderecos().get(i).setEmpresa(pessoaJuridica);
+        }
+        
         pessoaJuridica = pessoaRepository.save(pessoaJuridica);
         UsuarioModel usuarioPj = usuarioRepository.findByUsuarioByPessoa(pessoaJuridica.getId(),
                 pessoaJuridica.getEmail());
@@ -40,7 +46,7 @@ public class PessoaService {
             usuarioPj.setPessoa(pessoaJuridica);
             usuarioPj.setLogin(pessoaJuridica.getEmail());
 
-            String passwordEnvioEmail = ""+ Calendar.getInstance().getTimeInMillis();
+            String passwordEnvioEmail = "" + Calendar.getInstance().getTimeInMillis();
             String passwordCrypt = new BCryptPasswordEncoder().encode(passwordEnvioEmail);
 
             usuarioPj.setPassword(passwordCrypt);

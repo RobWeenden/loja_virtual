@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaAbstract;
 
 @Entity
@@ -32,7 +34,7 @@ public class EnderecoModel implements Serializable {
     private String rua;
 
     @Column(name = "end_logradouro")
-    private String logadouro;
+    private String logradouro;
 
     @Column(name = "end_bairro", nullable = false)
     private String bairro;
@@ -52,6 +54,7 @@ public class EnderecoModel implements Serializable {
     @Column(name = "end_uf", nullable = false)
     private String uf;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = PessoaAbstract.class)
     @JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
     private PessoaAbstract pessoa;
@@ -60,6 +63,7 @@ public class EnderecoModel implements Serializable {
     @Column(name = "end_tipo_enderco", nullable = false)
     private TipoEnderecoEnum tipoEndereco;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = PessoaAbstract.class)
     @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
     private PessoaAbstract empresa;
@@ -88,12 +92,12 @@ public class EnderecoModel implements Serializable {
         this.rua = rua;
     }
 
-    public String getLogadouro() {
-        return logadouro;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setLogadouro(String logadouro) {
-        this.logadouro = logadouro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getBairro() {

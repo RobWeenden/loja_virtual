@@ -42,7 +42,7 @@ public abstract class PessoaAbstract implements Serializable {
     private String telefone;
 
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<EnderecoModel> enderecos;
+    private List<EnderecoModel> enderecos = new ArrayList<EnderecoModel>();
 
     @Column(name = "psa_tipo_pessoa")
     private String tipoPessoa;
@@ -57,17 +57,6 @@ public abstract class PessoaAbstract implements Serializable {
 
     public String getTipoPessoa() {
         return tipoPessoa;
-    }
-
-    public List<EnderecoModel> getEndereco() {
-        return enderecos;
-    }
-
-    public void setEndereco(List<EnderecoModel> enderecos) {
-        if (enderecos == null) {
-            enderecos = new ArrayList<EnderecoModel>();
-        }
-        this.enderecos = enderecos;
     }
 
     public void setId(Long id) {
