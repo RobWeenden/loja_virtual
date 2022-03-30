@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableAsync
-@EntityScan(basePackages = {"br.com.rws.*" ,"br.com.rws.lojavirtual.loja_virtual_rws.*" })
-@ComponentScan(basePackages = {"br.com.rws.*" ,"br.com.rws.lojavirtual.loja_virtual_rws.*" })
-@EnableJpaRepositories(basePackages = {"br.com.rws.*" ,"br.com.rws.lojavirtual.loja_virtual_rws.*" })
+@EntityScan(basePackages = "br.com.rws.*")
+@ComponentScan(basePackages = {"br.com.rws.*"})
+@EnableJpaRepositories(basePackages = {"br.com.rws.*"})
 @EnableTransactionManagement
 public class LojaVirtualRwsApplication implements AsyncConfigurer {
 

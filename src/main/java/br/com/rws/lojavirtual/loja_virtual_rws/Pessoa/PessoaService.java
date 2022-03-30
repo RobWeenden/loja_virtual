@@ -62,10 +62,10 @@ public class PessoaService {
             usuarioRepository.inserirRoleAcessoPj(usuarioPj.getId());
 
             StringBuilder msgHtmlEnvio = new StringBuilder();
-            msgHtmlEnvio.append("<b>Segue abaixo seus dados de acesso para sua Loja Virtual</b>");
-            msgHtmlEnvio.append("<b>Login: <b>"+pessoaJuridica.getEmail()+"<br>");
-            msgHtmlEnvio.append("<b>Senha: <br>"+passwordEnvioEmail+"<br>");
-            msgHtmlEnvio.append("Agradecemo a Preferência.");
+            msgHtmlEnvio.append("<b><h3>Segue abaixo seus dados de acesso para sua Loja Virtual</h3></b><br>");
+            msgHtmlEnvio.append("<b>Login:</b>"+pessoaJuridica.getEmail()+ "<br>");
+            msgHtmlEnvio.append("<b>Senha:</b>"+passwordEnvioEmail+ "<br>");
+            msgHtmlEnvio.append("<h3>Agradecemo a Preferência.</h3>");
 
 
             try {
