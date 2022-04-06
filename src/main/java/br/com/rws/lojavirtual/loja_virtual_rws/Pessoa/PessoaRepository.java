@@ -9,4 +9,7 @@ public interface PessoaRepository extends CrudRepository<PessoaJuridicaModel, Lo
     
     @Query(value = "SELECT pj FROM PessoaJuridicaModel pj WHERE pj.cnpj = ?1")
     public PessoaJuridicaModel existeCnpjCadastrado(String cnpj);
+
+    @Query(value = "SELECT pj FROM PessoaJuridicaModel pj WHERE pj.inscEstadual = ?1")
+    public PessoaJuridicaModel existeInscEstadual(String inscEstadual);
 }
