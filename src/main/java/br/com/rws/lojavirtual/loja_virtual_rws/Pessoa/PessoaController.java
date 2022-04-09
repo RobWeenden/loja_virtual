@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
+import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCNPJ;
 
 @RestController
 public class PessoaController {
@@ -31,6 +32,10 @@ public class PessoaController {
         if (pessoaJuridica.getId() == null && pessoaRepository.existeInscEstadual(pessoaJuridica.getInscEstadual()) != null) {
             throw new CustomExceptions("A inscrição Estadual já existe cadastrado com o numero: "+pessoaJuridica.getInscEstadual());
         }
+        if (!ValidationCNPJ.isCNPJ(pessoaJuridica.getCnpj())) {
+            throw new CustomExceptions("Cnpj: "+ pessoaJuridica.getCnpj() + " está inválido");
+        }
+        
         pessoaJuridica = pessoaService.savePessoaJuridica(pessoaJuridica);
         return new ResponseEntity<PessoaJuridicaModel>(pessoaJuridica, HttpStatus.OK);
     }
