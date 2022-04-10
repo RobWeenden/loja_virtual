@@ -28,7 +28,13 @@ public interface UsuarioRepository extends CrudRepository<UsuarioModel, Long> {
     @Modifying
     @Query(value="INSERT INTO tb_usuario_role_acesso(usuario_id, role_acesso_id) "+
     " VALUES (?1, (SELECT rla_id FROM tb_role_acesso WHERE rla_desc = 'ROLE_USER') )", nativeQuery = true)
-    void inserirRoleAcessoPj(Long id);
+    void inserirAcessoUser(Long id);
+
+    @Transactional
+    @Modifying
+    @Query(value="INSERT INTO tb_usuario_role_acesso(usuario_id, role_acesso_id) "+
+    " VALUES (?1, (SELECT rla_id FROM tb_role_acesso WHERE rla_desc = ?2 limit 1) )", nativeQuery = true)
+    void inserirAcessoPJ(Long id, String acesso);
 
     @Query(value = "SELECT u FROM UsuarioModel u WHERE u.dataAtualPassword <= CURRENT_DATE -90")
     List<UsuarioModel> usuarioDataPasswordVencida();

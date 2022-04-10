@@ -10,18 +10,23 @@ import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.EnderecoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.TipoEnderecoEnum;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaController;
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaFisicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaJuridicaModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaJuridicaRepository;
 import junit.framework.TestCase;
 
 @Profile("test")
 @SpringBootTest(classes = LojaVirtualRwsApplication.class)
-public class TesteUsuario extends TestCase {
+class TesteUsuario extends TestCase {
 
     @Autowired
     PessoaController pessoaController;
-
+    
+    @Autowired
+    private PessoaJuridicaRepository pessoaJuridicaRepository;
+    
     @Test
-    public void testCadastroUsuario() throws CustomExceptions {
+    void testCadastroUsuarioPJ() throws CustomExceptions {
 
         PessoaJuridicaModel pessoaJuridica = new PessoaJuridicaModel();
         pessoaJuridica.setNome("_nome_" + gerarCaracterAleatorio());
@@ -76,7 +81,7 @@ public class TesteUsuario extends TestCase {
     }
 
     @Test
-    public String gerarCaracterAleatorio() {
+    String gerarCaracterAleatorio() {
         String randomString = "AabcDeFfgGhHsSdDJjKkLlçÇQWwEeRrTtYyUuIiOoPpZzXxCcVvBbNnMn)=m!#@#$%¨&*(_+_=-0987654321[{]}";
         StringBuilder sb = new StringBuilder(20);
         for (int i = 0; i < 20; i++) {
@@ -84,6 +89,61 @@ public class TesteUsuario extends TestCase {
             sb.append(randomString.charAt(index));
         }
         return sb.toString();
+    }
+
+    @Test
+    void testCadastroUsuarioPF() throws CustomExceptions {
+    	
+    	PessoaJuridicaModel pessoaJuridica = pessoaJuridicaRepository.existeCnpjCadastrado("AKDJ454837122936F");
+
+        PessoaFisicaModel pessoaFisica = new PessoaFisicaModel();
+        pessoaFisica.setNome("_nome_" + gerarCaracterAleatorio());
+        pessoaFisica.setEmail("robson.weenden@yahoo.com.br");
+        pessoaFisica.setTelefone("8585548555");
+        pessoaFisica.setTipoPessoa("_tipo_pessoa" + gerarCaracterAleatorio());
+        pessoaFisica.setCpf("896.582.880-57");
+        pessoaFisica.setEmpresa(pessoaJuridica);
+
+        EnderecoModel endereco1 = new EnderecoModel();
+        endereco1.setBairro("_bairro_1" + gerarCaracterAleatorio());
+        endereco1.setCep("_cep_1" + gerarCaracterAleatorio());
+        endereco1.setComplemento("_complemento_1" + gerarCaracterAleatorio());
+        endereco1.setEmpresa(pessoaFisica);
+        endereco1.setNumero("_numero_1" + gerarCaracterAleatorio());
+        endereco1.setPessoa(pessoaFisica);
+        endereco1.setRua("_rua_1" + gerarCaracterAleatorio());
+        endereco1.setLogradouro("_logra_1" + gerarCaracterAleatorio());
+        endereco1.setTipoEndereco(TipoEnderecoEnum.ENTREGA);
+        endereco1.setUf("_uf_1" + gerarCaracterAleatorio());
+        endereco1.setCidade("_cidade_1" + gerarCaracterAleatorio());
+        endereco1.setEmpresa(pessoaJuridica);
+
+        EnderecoModel endereco2 = new EnderecoModel();
+        endereco2.setRua("_rua_2" + gerarCaracterAleatorio());
+        endereco2.setLogradouro("_logra_2" + gerarCaracterAleatorio());
+        endereco2.setBairro("_bairro_2" + gerarCaracterAleatorio());
+        endereco2.setComplemento("_complemento_2" + gerarCaracterAleatorio());
+        endereco2.setCep("_cep_2" + gerarCaracterAleatorio());
+        endereco2.setNumero("_numero_2" + gerarCaracterAleatorio());
+        endereco2.setUf("_uf_2" + gerarCaracterAleatorio());
+        endereco2.setTipoEndereco(TipoEnderecoEnum.COBRANCA);
+        endereco2.setEmpresa(pessoaFisica);
+        endereco2.setPessoa(pessoaFisica);
+        endereco2.setCidade("_cidade_1" + gerarCaracterAleatorio());
+        endereco2.setEmpresa(pessoaJuridica);
+
+        pessoaFisica.getEnderecos().add(endereco2);
+        pessoaFisica.getEnderecos().add(endereco1);
+
+        pessoaController.savePessoaFisica(pessoaFisica);
+        // assertEquals(true, pessoaJuridica.getId() > 0);
+
+        // for(EnderecoModel endereco : pessoaJuridica.getEnderecos()){
+        //     assertEquals(true, endereco.getId() > 0);
+        // }
+
+       // assertEquals(2, pessoaJuridica.getEnderecos().size());
+        //CONTINUE  53:57
     }
 
 }
