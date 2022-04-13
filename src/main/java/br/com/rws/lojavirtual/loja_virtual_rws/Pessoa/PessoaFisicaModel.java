@@ -9,11 +9,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 @Entity
 @Table(name = "tb_pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "psa_id")
 public class PessoaFisicaModel extends PessoaAbstract {
-
+	
+	@CPF(message = "Cpf está inválido")
     @Column(name = "psf_cpf", nullable = false)
     private String cpf;
 

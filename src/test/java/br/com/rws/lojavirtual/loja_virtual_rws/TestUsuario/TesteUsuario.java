@@ -92,7 +92,7 @@ class TesteUsuario extends TestCase {
     }
 
     @Test
-    void testCadastroUsuarioPF() throws CustomExceptions {
+    void testCadastroUsuarioPF() throws Exception {
     	
     	PessoaJuridicaModel pessoaJuridica = pessoaJuridicaRepository.existeCnpjCadastrado("AKDJ454837122936F");
 

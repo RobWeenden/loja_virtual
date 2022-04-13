@@ -21,61 +21,60 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ExceptionsController extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({ Exception.class, RuntimeException.class, Throwable.class })
-    @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+	@ExceptionHandler({ Exception.class, RuntimeException.class, Throwable.class })
+	@Override
+	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
 
-        ObjectErrorDTO errorDto = new ObjectErrorDTO();
-        String msg = "";
-        if (ex instanceof MethodArgumentNotValidException) {
-            List<ObjectError> listError = ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors();
-            for (ObjectError objectError : listError) {
-                msg += objectError.getDefaultMessage() + "\n";
-            }
+		ObjectErrorDTO errorDto = new ObjectErrorDTO();
+		String msg = "";
+		if (ex instanceof MethodArgumentNotValidException) {
+			List<ObjectError> listError = ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors();
+			for (ObjectError objectError : listError) {
+				msg += objectError.getDefaultMessage() + " \n";
+			}
 
-        } 
-        if (ex instanceof HttpMessageNotReadableException) {
-            msg = "Não há dados sendo enviados no corpo da requisição";
-        }else {
-            msg = ex.getMessage();
-        }
-        errorDto.setError(msg);
-        errorDto.setCodeError(status.value() + " ==> " + status.getReasonPhrase());
-        ex.printStackTrace();
-        return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+		} else if (ex instanceof HttpMessageNotReadableException) {
+			msg = "Não há dados sendo enviados no corpo da requisição";
+		} else {
+			msg = ex.getMessage();
+		}
+		errorDto.setError(msg);
+		errorDto.setCodeError(status.value() + " ==> " + status.getReasonPhrase());
+		ex.printStackTrace();
+		return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
-    @ExceptionHandler({ DataIntegrityViolationException.class, ConstraintViolationException.class, SQLException.class })
-    protected ResponseEntity<Object> handlerExceptionDataInEntity(Exception ex) {
+	@ExceptionHandler({ DataIntegrityViolationException.class, ConstraintViolationException.class, SQLException.class })
+	protected ResponseEntity<Object> handlerExceptionDataInEntity(Exception ex) {
 
-        ObjectErrorDTO errorDto = new ObjectErrorDTO();
-        String msg = "";
-        if (ex instanceof DataIntegrityViolationException) {
-            msg = "Error de integridade no banco: "
-                    + ((DataIntegrityViolationException) ex).getCause().getCause().getMessage();
-        } else if (ex instanceof SQLException) {
-            msg = "Error de SQL do Banco: " + ((SQLException) ex).getCause().getCause().getMessage();
+		ObjectErrorDTO errorDto = new ObjectErrorDTO();
+		String msg = "";
+		if (ex instanceof DataIntegrityViolationException) {
+			msg = "Error de integridade no banco: "
+					+ ((DataIntegrityViolationException) ex).getCause().getCause().getMessage();
+		} else if (ex instanceof SQLException) {
+			msg = "Error de SQL do Banco: " + ((SQLException) ex).getCause().getCause().getMessage();
 
-        } else if (ex instanceof ConstraintViolationException) {
-            msg = "Eror de chave estrangiera: "
-                    + ((ConstraintViolationException) ex).getCause().getCause().getMessage();
-        } else {
-            msg = ex.getMessage();
-        }
-        errorDto.setError(msg);
-        errorDto.setCodeError(HttpStatus.INTERNAL_SERVER_ERROR.toString());
-        ex.printStackTrace();
-        return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else if (ex instanceof ConstraintViolationException) {
+			msg = "Eror de chave estrangiera: "
+					+ ((ConstraintViolationException) ex).getCause().getCause().getMessage();
+		} else {
+			msg = ex.getMessage();
+		}
+		errorDto.setError(msg);
+		errorDto.setCodeError(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+		ex.printStackTrace();
+		return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
 
-    }
+	}
 
-    @ExceptionHandler(CustomExceptions.class)
-    public ResponseEntity<Object> handleExceptionCustom(CustomExceptions customExpr){
-        ObjectErrorDTO errorDTO = new ObjectErrorDTO();
-        errorDTO.setError(customExpr.getMessage());
-        errorDTO.setCodeError(HttpStatus.OK.toString());
+	@ExceptionHandler(CustomExceptions.class)
+	public ResponseEntity<Object> handleExceptionCustom(CustomExceptions customExpr) {
+		ObjectErrorDTO errorDTO = new ObjectErrorDTO();
+		errorDTO.setError(customExpr.getMessage());
+		errorDTO.setCodeError(HttpStatus.OK.toString());
 
-        return new ResponseEntity<Object>(errorDTO, HttpStatus.OK);
-    }
+		return new ResponseEntity<Object>(errorDTO, HttpStatus.OK);
+	}
 }

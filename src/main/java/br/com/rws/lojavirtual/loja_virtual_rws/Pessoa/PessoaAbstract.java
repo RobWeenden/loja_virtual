@@ -19,6 +19,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.EnderecoModel;
 
@@ -31,10 +35,14 @@ public abstract class PessoaAbstract implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
     @Column(name = "psa_id")
     private Long id;
-
+    
+    @Size(min = 4, message = "O nome deve ter no mínimo 4 letras")
+    @NotBlank(message = "Nome deve ser informado")
+    @NotNull(message = "Nome deve ser informado")
     @Column(name = "psa_nome", nullable = false)
     private String nome;
-
+    
+    @Email(message = "o formato do e-mail está inválido")
     @Column(name = "psa_email", nullable = false)
     private String email;
 
