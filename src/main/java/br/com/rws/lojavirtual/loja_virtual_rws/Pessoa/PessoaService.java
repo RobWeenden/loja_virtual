@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
+import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.CepDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioRepository;
@@ -126,5 +128,10 @@ public class PessoaService {
           
         }
         return pessoaFisica;
+    }
+    
+    public CepDTO consultaCep(String cep) {
+    	
+    	return new RestTemplate().getForEntity("https://viacep.com.br/ws/" + cep + "/json/", CepDTO.class).getBody();
     }
 }

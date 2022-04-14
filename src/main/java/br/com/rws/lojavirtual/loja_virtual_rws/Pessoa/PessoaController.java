@@ -5,10 +5,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.CepDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCNPJ;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCPF;
@@ -70,5 +74,14 @@ public class PessoaController {
 
 		pessoaFisica = pessoaService.savePessoaFisica(pessoaFisica);
 		return new ResponseEntity<>(pessoaFisica, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consulta/cep/{cep}")
+	public ResponseEntity<CepDTO> consultaCep(@PathVariable("cep") String cep){
+		
+		CepDTO cepDto = pessoaService.consultaCep(cep);
+		
+		return new ResponseEntity<CepDTO>(cepDto, HttpStatus.OK);
 	}
 }
