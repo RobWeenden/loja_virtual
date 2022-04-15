@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.CepDTO;
+import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.EnderecoModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.EnderecoRepository;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCNPJ;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCPF;
@@ -25,6 +27,9 @@ public class PessoaController {
 
 	@Autowired
 	PessoaFisicaRepository pessoaFisicaRepository;
+	
+	@Autowired
+	EnderecoRepository enderecoRepository;
 
 	@Autowired
 	PessoaService pessoaService;
@@ -50,6 +55,32 @@ public class PessoaController {
 		
 		if (!ValidationCNPJ.isCNPJ(pessoaJuridica.getCnpj())) {
 			throw new CustomExceptions("Cnpj: " + pessoaJuridica.getCnpj() + " está inválido");
+		}
+		
+		if (pessoaJuridica.getId() == null || pessoaJuridica.getId() <= 0) {
+			for (int i = 0; i < pessoaJuridica.getEnderecos().size(); i++) {
+				CepDTO cepDto = pessoaService.consultaCep(pessoaJuridica.getEnderecos().get(i).getCep());
+				pessoaJuridica.getEnderecos().get(i).setBairro(cepDto.getBairro());
+				pessoaJuridica.getEnderecos().get(i).setCidade(cepDto.getLocalidade());
+				pessoaJuridica.getEnderecos().get(i).setComplemento(cepDto.getComplemento());
+				pessoaJuridica.getEnderecos().get(i).setLogradouro(cepDto.getLogradouro());
+				pessoaJuridica.getEnderecos().get(i).setUf(cepDto.getUf());
+			}
+		} else {
+			for (int i = 0; i < pessoaJuridica.getEnderecos().size(); i++) {
+				EnderecoModel enderecoTemp = enderecoRepository.findById(pessoaJuridica.getEnderecos().get(i).getId()).get();
+
+				if (!enderecoTemp.getCep().equals(pessoaJuridica.getEnderecos().get(i).getCep())) {
+
+					CepDTO cepDto = pessoaService.consultaCep(pessoaJuridica.getEnderecos().get(i).getCep());
+					pessoaJuridica.getEnderecos().get(i).setBairro(cepDto.getBairro());
+					pessoaJuridica.getEnderecos().get(i).setCidade(cepDto.getLocalidade());
+					pessoaJuridica.getEnderecos().get(i).setComplemento(cepDto.getComplemento());
+					pessoaJuridica.getEnderecos().get(i).setLogradouro(cepDto.getLogradouro());
+					pessoaJuridica.getEnderecos().get(i).setUf(cepDto.getUf());
+
+				}
+			}
 		}
 
 		pessoaJuridica = pessoaService.savePessoaJuridica(pessoaJuridica);
@@ -80,8 +111,6 @@ public class PessoaController {
 	@GetMapping(value = "**/consulta/cep/{cep}")
 	public ResponseEntity<CepDTO> consultaCep(@PathVariable("cep") String cep){
 		
-		CepDTO cepDto = pessoaService.consultaCep(cep);
-		
-		return new ResponseEntity<CepDTO>(cepDto, HttpStatus.OK);
+		return new ResponseEntity<>(pessoaService.consultaCep(cep), HttpStatus.OK);
 	}
 }
