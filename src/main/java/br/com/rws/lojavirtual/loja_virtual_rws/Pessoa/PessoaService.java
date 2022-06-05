@@ -131,7 +131,7 @@ public class PessoaService {
     }
     
     public CepDTO consultaCep(String cep) {
-    	
+    	//API VIA CEP
     	return new RestTemplate().getForEntity("https://viacep.com.br/ws/" + cep + "/json/", CepDTO.class).getBody();
     }
 }

@@ -1,9 +1,14 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.Exceptions;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,9 +22,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
+import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
+
 @RestControllerAdvice
 @ControllerAdvice
 public class ExceptionsController extends ResponseEntityExceptionHandler {
+	
+	@Autowired
+	private SendEmailService sendEmail;
 
 	@ExceptionHandler({ Exception.class, RuntimeException.class, Throwable.class })
 	@Override
@@ -41,7 +52,15 @@ public class ExceptionsController extends ResponseEntityExceptionHandler {
 		}
 		errorDto.setError(msg);
 		errorDto.setCodeError(status.value() + " ==> " + status.getReasonPhrase());
+		
 		ex.printStackTrace();
+		
+		try {
+			sendEmail.enviarEmailHtml("Erro na Loja Virtual", ExceptionUtils.getStackTrace(ex), Constantes.USERNAME_EMAIL);
+			
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			e.printStackTrace();
+		} 
 		return new ResponseEntity<Object>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

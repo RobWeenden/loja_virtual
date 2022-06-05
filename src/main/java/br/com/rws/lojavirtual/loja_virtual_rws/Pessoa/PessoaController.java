@@ -1,10 +1,13 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.Pessoa;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +36,9 @@ public class PessoaController {
 
 	@Autowired
 	PessoaService pessoaService;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@PostMapping(value = "**/save/pessoa-juridica")
 	public ResponseEntity<PessoaJuridicaModel> savePessoaJuridica(@RequestBody @Valid PessoaJuridicaModel pessoaJuridica)
@@ -113,4 +119,39 @@ public class PessoaController {
 		
 		return new ResponseEntity<>(pessoaService.consultaCep(cep), HttpStatus.OK);
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consultar-nome-pessoa-fisica/{nome}")
+	public ResponseEntity<List<PessoaFisicaModel>> consultaPFNome(@PathVariable("nome") String nome){
+		List<PessoaFisicaModel> listPF = pessoaFisicaRepository.pesquisaPorNomePF(nome.trim().toUpperCase());
+		
+		jdbcTemplate.execute("begin; update tb_acesso_endpoint set qtd_acesso_endpoint = qtd_acesso_endpoint + 1; commit");
+		
+		return new ResponseEntity<List<PessoaFisicaModel>>(listPF, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consultar-cpf/{cpf}")
+	public ResponseEntity<List<PessoaFisicaModel>> consultaPfCpf(@PathVariable("cpf") String cpf){
+		List<PessoaFisicaModel> listPF = pessoaFisicaRepository.pesquisarCpfFromList(cpf);
+		
+		return new ResponseEntity<>(listPF, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consultar-nome-pessoa-juridica/{nome}")
+	public ResponseEntity<List<PessoaJuridicaModel>> consultaPJNome(@PathVariable("nome") String nome){
+		List<PessoaJuridicaModel> listPJ = pessoaJuridicaRepository.pesquisaPorNomePJ(nome.trim().toUpperCase());
+		
+		return new ResponseEntity<>(listPJ, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consultar-cnpj/{cnpj}")
+	public ResponseEntity<List<PessoaJuridicaModel>> consultaPJCnpj(@PathVariable("cnpj") String cnpj){
+		List<PessoaJuridicaModel> listPJ = pessoaJuridicaRepository.pesquisarCNPJ(cnpj);
+		
+		return new ResponseEntity<>(listPJ, HttpStatus.OK);
+	}
+	
 }

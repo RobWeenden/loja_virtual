@@ -1,0 +1,6 @@
+--Tabela destinada para criação e verificaçao de acessos aos endpoint da API
+--CREATE TABLE public.tb_acesso_endpoint
+--(
+--    nome_endpoint character varying COLLATE pg_catalog."default",
+--    qtd_acesso_endpoint integer
+--)
