@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.LojaVirtualRwsApplication;
-import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.CepDTO;
-import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaController;
+import br.com.rws.lojavirtual.loja_virtual_rws.controller.PessoaController;
+import br.com.rws.lojavirtual.loja_virtual_rws.dto.CepDTO;
 import junit.framework.TestCase;
 
 @Profile("test")

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,8 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioModel;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 

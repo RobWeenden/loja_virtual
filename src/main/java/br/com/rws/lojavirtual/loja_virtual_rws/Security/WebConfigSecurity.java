@@ -16,8 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioImplementsUserDetailsService;
-
 
 
 @Configuration

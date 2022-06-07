@@ -6,13 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.LojaVirtualRwsApplication;
-import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.EnderecoModel;
-import br.com.rws.lojavirtual.loja_virtual_rws.Endereco.TipoEnderecoEnum;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
-import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaController;
-import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaFisicaModel;
-import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaJuridicaModel;
-import br.com.rws.lojavirtual.loja_virtual_rws.Pessoa.PessoaJuridicaRepository;
+import br.com.rws.lojavirtual.loja_virtual_rws.controller.PessoaController;
+import br.com.rws.lojavirtual.loja_virtual_rws.enums.TipoEnderecoEnum;
+import br.com.rws.lojavirtual.loja_virtual_rws.model.EnderecoModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaJuridicaModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.repository.PessoaJuridicaRepository;
 import junit.framework.TestCase;
 
 @Profile("test")

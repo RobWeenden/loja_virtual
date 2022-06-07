@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
 import br.com.rws.lojavirtual.loja_virtual_rws.Context.ApplicationContextLoad;
-import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioModel;
-import br.com.rws.lojavirtual.loja_virtual_rws.Usuario.UsuarioRepository;
+import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
+import br.com.rws.lojavirtual.loja_virtual_rws.repository.UsuarioRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
