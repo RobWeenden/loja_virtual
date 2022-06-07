@@ -19,6 +19,7 @@ import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCNPJ;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCPF;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.CepDTO;
+import br.com.rws.lojavirtual.loja_virtual_rws.dto.ConsultaCnpjDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.enums.TipoPessoaEnum;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.EnderecoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
@@ -133,6 +134,13 @@ public class PessoaController {
 	public ResponseEntity<CepDTO> consultaCep(@PathVariable("cep") String cep){
 		
 		return new ResponseEntity<>(pessoaService.consultaCep(cep), HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "**/consulta/cnpj/{cnpj}")
+	public ResponseEntity<ConsultaCnpjDTO> consultaCnpjReceitaWS(@PathVariable("cnpj") String cnpj){
+		
+		return new ResponseEntity<>(pessoaService.consultaCnpjReceitaWS(cnpj), HttpStatus.OK);
 	}
 	
 	@ResponseBody

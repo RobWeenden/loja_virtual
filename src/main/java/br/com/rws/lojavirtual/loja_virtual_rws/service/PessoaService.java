@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
 import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.CepDTO;
+import br.com.rws.lojavirtual.loja_virtual_rws.dto.ConsultaCnpjDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaJuridicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
@@ -138,4 +139,10 @@ public class PessoaService {
     	//API VIA CEP
     	return new RestTemplate().getForEntity("https://viacep.com.br/ws/" + cep + "/json/", CepDTO.class).getBody();
     }
+
+
+	public ConsultaCnpjDTO consultaCnpjReceitaWS(String cnpj) {
+		// API RECEITA WS
+    	return new RestTemplate().getForEntity("https://receitaws.com.br/v1/cnpj/" + cnpj, ConsultaCnpjDTO.class).getBody();
+	}
 }
