@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Security;
+package br.com.rws.lojavirtual.loja_virtual_rws.security;
 
 import java.io.IOException;
 

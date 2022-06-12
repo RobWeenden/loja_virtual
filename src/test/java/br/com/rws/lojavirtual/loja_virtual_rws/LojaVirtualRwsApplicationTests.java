@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.controller.RoleAcessoController;
+import br.com.rws.lojavirtual.loja_virtual_rws.exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.RoleAcessoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.repository.RoleAcessoRepository;
 import br.com.rws.lojavirtual.loja_virtual_rws.service.RoleAcessoService;

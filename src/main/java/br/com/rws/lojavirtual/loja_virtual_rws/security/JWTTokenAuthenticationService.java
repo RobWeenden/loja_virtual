@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Security;
+package br.com.rws.lojavirtual.loja_virtual_rws.security;
 
 import java.io.IOException;
 import java.util.Date;
@@ -11,8 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
-import br.com.rws.lojavirtual.loja_virtual_rws.Context.ApplicationContextLoad;
+import br.com.rws.lojavirtual.loja_virtual_rws.constants.Constantes;
+import br.com.rws.lojavirtual.loja_virtual_rws.context.ApplicationContextLoad;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.repository.UsuarioRepository;
 import io.jsonwebtoken.ExpiredJwtException;

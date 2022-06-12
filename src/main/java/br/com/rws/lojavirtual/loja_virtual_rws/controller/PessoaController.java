@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCNPJ;
 import br.com.rws.lojavirtual.loja_virtual_rws.Util.ValidationCPF;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.CepDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.ConsultaCnpjDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.enums.TipoPessoaEnum;
+import br.com.rws.lojavirtual.loja_virtual_rws.exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.EnderecoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaJuridicaModel;

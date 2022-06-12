@@ -6,9 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
 import br.com.rws.lojavirtual.loja_virtual_rws.LojaVirtualRwsApplication;
-import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.controller.PessoaController;
 import br.com.rws.lojavirtual.loja_virtual_rws.enums.TipoEnderecoEnum;
+import br.com.rws.lojavirtual.loja_virtual_rws.exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.EnderecoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaJuridicaModel;

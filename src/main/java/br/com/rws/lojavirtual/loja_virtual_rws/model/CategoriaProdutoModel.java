@@ -1,4 +1,5 @@
 package br.com.rws.lojavirtual.loja_virtual_rws.model;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -17,66 +18,67 @@ import javax.persistence.Table;
 @Table(name = "tb_categoria_produto")
 @SequenceGenerator(name = "seq_tb_categoria_produto", sequenceName = "seq_tb_categoria_produto", allocationSize = 1, initialValue = 1)
 public class CategoriaProdutoModel implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tb_categoria_produto")
-    @Column(name = "ctp_id")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tb_categoria_produto")
+	@Column(name = "ctp_id")
+	private Long id;
 
-    @Column(name = "ctp_desc", nullable = false)
-    private String descricao;
+	@Column(name = "ctp_desc", nullable = false)
+	private String descricao;
 
-    @ManyToOne(targetEntity = PessoaAbstract.class)
-    @JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
-    private PessoaAbstract empresa;
+	@ManyToOne(targetEntity = PessoaAbstract.class)
+	@JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+	private PessoaJuridicaModel empresa;
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public PessoaJuridicaModel getEmpresa() {
+		return empresa;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setEmpresa(PessoaJuridicaModel empresa) {
+		this.empresa = empresa;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CategoriaProdutoModel other = (CategoriaProdutoModel) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public PessoaAbstract getEmpresa() {
-        return empresa;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    public void setEmpresa(PessoaAbstract empresa) {
-        this.empresa = empresa;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CategoriaProdutoModel other = (CategoriaProdutoModel) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 }

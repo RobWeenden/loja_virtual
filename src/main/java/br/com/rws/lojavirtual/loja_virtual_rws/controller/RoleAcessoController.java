@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
+import br.com.rws.lojavirtual.loja_virtual_rws.exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.RoleAcessoModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.repository.RoleAcessoRepository;
 import br.com.rws.lojavirtual.loja_virtual_rws.service.RoleAcessoService;
@@ -48,18 +48,18 @@ public class RoleAcessoController {
 
     @ResponseBody
     @PostMapping(value = "**/delete")
-    public ResponseEntity deleteRole(@RequestBody RoleAcessoModel roleModel) {
+    public ResponseEntity<String> deleteRole(@RequestBody RoleAcessoModel roleModel) {
         roleRepository.deleteById(roleModel.getId());
 
-        return new ResponseEntity("Acesso Removido", HttpStatus.OK);
+        return new ResponseEntity<>("Acesso Removido", HttpStatus.OK);
     }
 
     @ResponseBody
     @DeleteMapping(value = "**/deleteById/{id}")
-    public ResponseEntity deleteByIdRole(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteByIdRole(@PathVariable("id") Long id) {
         roleRepository.deleteById(id);
 
-        return new ResponseEntity("Acesso Removido por Id", HttpStatus.OK);
+        return new ResponseEntity<>("Acesso Removido por Id", HttpStatus.OK);
     }
 
     @ResponseBody
@@ -71,7 +71,7 @@ public class RoleAcessoController {
             throw new CustomExceptions("Não foi encontrado Acesso com código: " + id);
         }
 
-        return new ResponseEntity<RoleAcessoModel>(role, HttpStatus.OK);
+        return new ResponseEntity<>(role, HttpStatus.OK);
     }
 
     @ResponseBody
@@ -79,6 +79,6 @@ public class RoleAcessoController {
     public ResponseEntity<List<RoleAcessoModel>> searchDescriptionRole(@PathVariable("desc") String desc) {
         List<RoleAcessoModel> role = roleRepository.buscarRoleDescricao(desc.toUpperCase());
 
-        return new ResponseEntity<List<RoleAcessoModel>>(role, HttpStatus.OK);
+        return new ResponseEntity<>(role, HttpStatus.OK);
     }
 }

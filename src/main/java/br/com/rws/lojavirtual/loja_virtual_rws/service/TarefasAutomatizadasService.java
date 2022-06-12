@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
+import br.com.rws.lojavirtual.loja_virtual_rws.email.SendEmailService;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.repository.UsuarioRepository;
 

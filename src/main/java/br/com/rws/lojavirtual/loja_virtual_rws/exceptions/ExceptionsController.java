@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Exceptions;
+package br.com.rws.lojavirtual.loja_virtual_rws.exceptions;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
-import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
+import br.com.rws.lojavirtual.loja_virtual_rws.constants.Constantes;
+import br.com.rws.lojavirtual.loja_virtual_rws.email.SendEmailService;
 
 @RestControllerAdvice
 @ControllerAdvice

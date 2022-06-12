@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Email;
+package br.com.rws.lojavirtual.loja_virtual_rws.email;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Constants.Constantes;
+import br.com.rws.lojavirtual.loja_virtual_rws.constants.Constantes;
 
 @Service
 public class SendEmailService {

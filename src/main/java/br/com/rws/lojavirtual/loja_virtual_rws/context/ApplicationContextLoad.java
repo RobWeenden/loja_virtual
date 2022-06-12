@@ -1,4 +1,4 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Context;
+package br.com.rws.lojavirtual.loja_virtual_rws.context;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

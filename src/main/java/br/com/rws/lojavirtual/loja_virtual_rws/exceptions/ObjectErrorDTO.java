@@ -1,10 +1,11 @@
-package br.com.rws.lojavirtual.loja_virtual_rws.Exceptions;
+package br.com.rws.lojavirtual.loja_virtual_rws.exceptions;
 
 import java.io.Serializable;
 
 public class ObjectErrorDTO implements Serializable {
-
-    private String error;
+	private static final long serialVersionUID = 1L;
+	
+	private String error;
     private String codeError;
 
     public String getError() {

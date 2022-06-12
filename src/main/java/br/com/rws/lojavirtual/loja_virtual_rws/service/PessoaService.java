@@ -8,10 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.rws.lojavirtual.loja_virtual_rws.Email.SendEmailService;
-import br.com.rws.lojavirtual.loja_virtual_rws.Exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.CepDTO;
 import br.com.rws.lojavirtual.loja_virtual_rws.dto.ConsultaCnpjDTO;
+import br.com.rws.lojavirtual.loja_virtual_rws.email.SendEmailService;
+import br.com.rws.lojavirtual.loja_virtual_rws.exceptions.CustomExceptions;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaFisicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.PessoaJuridicaModel;
 import br.com.rws.lojavirtual.loja_virtual_rws.model.UsuarioModel;
